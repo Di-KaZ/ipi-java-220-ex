@@ -1,4 +1,6 @@
 package com.ipiecoles.java.java220;
+import java.util.Objects;
+
 import org.joda.time.LocalDate;
 
 public class Technicien extends Employe implements Comparable<Technicien> {
@@ -45,5 +47,9 @@ public class Technicien extends Employe implements Comparable<Technicien> {
         if (this.grade < other.getGrade())
             return -1;
         return 0;
+    }
+    @Override
+    public int hashCode() {
+        return  Objects.hash(super.hashCode(), this.grade != null ? this.grade.hashCode() : 0);
     }
 }

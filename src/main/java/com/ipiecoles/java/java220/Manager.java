@@ -2,7 +2,11 @@ package com.ipiecoles.java.java220;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.joda.time.LocalDate;
 
@@ -21,6 +25,7 @@ public class Manager extends Employe {
     }
     public void ajoutTechnicienEquipe(Technicien technicien) {
         this.equipe.add(technicien);
+        System.out.println(equipe.size());
     }
     @Override
     public void setSalaire(Double salaire) {
@@ -44,5 +49,13 @@ public class Manager extends Employe {
 
     public void ajoutTechnicienEquipe(String nom, String prenom, String matricule, LocalDate dateEmbauche, Double salaire, Integer grade) {
 		this.ajoutTechnicienEquipe(new Technicien(nom, prenom, matricule, dateEmbauche, salaire, grade));
-	}
+    }
+
+    public List<Technicien> equipeParGrade() {
+        return equipe.stream().collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public Double salaireEquipeGrade1() {
+        return equipe.stream().filter(equipier-> {return equipier.getGrade() == 1;}).mapToDouble(equipier->equipier.getSalaire()).sum();
+    }
 }
