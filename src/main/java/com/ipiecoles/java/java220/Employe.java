@@ -79,7 +79,7 @@ public abstract class Employe {
 
     @Override
     public String toString() {
-        return "Employe{nom='" + this.nom + "', prenom='" + this.prenom + "', matricule='" + this.matricule + "', dateEmbauche="+ this.dateEmbauche.toString() + ", salaire=" + this.salaire + "}";
+        return "Employe{nom='" + this.nom + "', prenom='" + this.prenom + "', matricule='" + this.matricule + "', dateEmbauche="+ (this.dateEmbauche != null ? this.dateEmbauche.toString() : 0) + ", salaire=" + this.salaire + "}";
     }
 
     @Override
@@ -90,9 +90,9 @@ public abstract class Employe {
         Employe employe2 = (Employe) other;
         if (this.nom == employe2.nom &&
             this.prenom == employe2.prenom &&
-            this.dateEmbauche.equals(employe2.dateEmbauche) &&
+            (this.dateEmbauche != null ? this.dateEmbauche.equals(employe2.dateEmbauche) : true)  &&
             this.matricule == employe2.matricule &&
-            this.salaire.equals(employe2.salaire)) {
+            (this.salaire != null ? this.salaire.equals(employe2.salaire) : true)) {
             return true;
         }
         return false;
@@ -100,7 +100,7 @@ public abstract class Employe {
     @Override
     public int hashCode() {
         return Objects.hash(this.nom != null ? this.nom.hashCode() : 0,
-        this.prenom != null ? this.prenom.hashCode() : 0,
+                            this.prenom != null ? this.prenom.hashCode() : 0,
                             this.matricule != null ? this.matricule.hashCode() : 0,
                             this.dateEmbauche != null ? this.dateEmbauche.hashCode() : 0,
                             this.salaire != null ? this.salaire.hashCode() : 0);
