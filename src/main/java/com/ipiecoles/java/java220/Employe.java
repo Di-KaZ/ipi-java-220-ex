@@ -1,5 +1,7 @@
 package com.ipiecoles.java.java220;
 
+import java.util.Objects;
+
 import org.joda.time.LocalDate;
 
 /**
@@ -71,10 +73,42 @@ public class Employe {
     }
 
     public Integer getNbConges () {
-        return 25;
+        return Entreprise.NB_CONGES_BASE;
     }
+
     @Override
     public String toString() {
         return "Employe{nom='" + this.nom + "', prenom='" + this.prenom + "', matricule='" + this.matricule + "', dateEmbauche="+ this.dateEmbauche.toString() + ", salaire=" + this.salaire + "}";
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null || this.getClass() != other.getClass()) {
+            return false;
+        }
+        Employe employe2 = (Employe) other;
+        if (this.nom == employe2.nom &&
+            this.prenom == employe2.prenom &&
+            this.dateEmbauche.equals(employe2.dateEmbauche) &&
+            this.matricule == employe2.matricule &&
+            this.salaire.equals(employe2.salaire)) {
+            return true;
+        }
+        return false;
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.nom.hashCode(),
+                            this.prenom.hashCode(),
+                            this.matricule.hashCode(),
+                            this.dateEmbauche.hashCode(),
+                            this.salaire.hashCode());
+    }
+    public void augmenterSalaire(Double pourcentage) {
+            this.salaire = this.salaire + this.salaire * pourcentage;
+    }
+
+    public Double getPrimeAnnuelle() {
+        return Entreprise.PRIME_MANAGER_PAR_TECHNICIEN;
     }
 }
