@@ -19,6 +19,14 @@ public class Commercial extends Employe {
         this.caAnnuel = caAnnuel;
     }
 
+    public void setPerformance(Integer performance) {
+        this.performance = performance;
+    }
+
+    public Integer getPerformance() {
+        return performance;
+    }
+
     @Override
     public Double getPrimeAnnuelle() {
         if (caAnnuel == null)
@@ -54,8 +62,8 @@ public class Commercial extends Employe {
         return true;
     }
 
-    public Note equivalenceNote(Integer note) {
-        switch (note) {
+    public Note equivalenceNote() {
+        switch (this.performance) {
             case 0:
                 return Note.INSUFFISANT;
             case 50:
